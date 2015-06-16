@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import PDFDoc from 'pdfkit/document';
+import PDFDoc from 'npm:pdfkit';
 
 export default Ember.Service.extend({
   createInvoice: function(params) {
