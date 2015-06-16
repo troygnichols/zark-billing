@@ -1,11 +1,19 @@
 import Ember from 'ember';
+import blobStream from 'npm:blob-stream';
 
 export default Ember.Controller.extend({
   pdf: Ember.inject.service(),
 
   actions: {
     generateInvoice: function() {
-      var doc = this.get('pdf').createInvoice({
+      var stream = blobStream();
+
+      stream.on('finish', function() {
+        var url = this.toBlobURL('application/pdf');
+        window.open(url);
+      });
+
+      this.get('pdf').createInvoice(stream, {
         entityName: 'Troy Nichols',
         clientName: 'Onsite Health Diagnostics',
         invoiceID:  '2',
@@ -31,8 +39,6 @@ export default Ember.Controller.extend({
         amountDue:  '$2,400.00',
         notes:      'This invoice covers all of my development and consulting work for May'
       });
-
-      console.log(doc);
     }
   }
 });

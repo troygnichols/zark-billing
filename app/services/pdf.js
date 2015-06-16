@@ -2,7 +2,7 @@ import Ember from 'ember';
 import PDFDoc from 'npm:pdfkit';
 
 export default Ember.Service.extend({
-  createInvoice: function(params) {
+  createInvoice: function(pipe, params) {
     var black = '#000',
         darkGrey = '#696969',
         medGrey = '#ddd';
@@ -10,6 +10,8 @@ export default Ember.Service.extend({
     var mainFont = 'Helvetica';
 
     var doc = new PDFDoc();
+
+    doc.pipe(pipe);
 
     var tableDividerLine = function(doc, y) {
       doc.save()
