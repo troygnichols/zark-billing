@@ -125,7 +125,8 @@ export default Ember.Service.extend({
 
       y += marginTop;
 
-      doc.text(item.type, 50, y)
+      doc.font(mainFont, 8)
+        .text(item.type, 50, y)
         .text(item.description, 120, y)
         .text(item.quantity, 370, y)
         .text(item.unitPrice, 428, y)
