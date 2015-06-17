@@ -2,7 +2,10 @@ import Ember from 'ember';
 import PDFDoc from 'npm:pdfkit';
 
 export default Ember.Service.extend({
-  createInvoice: function(pipe, params) {
+  createInvoice: function(pipe, invoice, options) {
+    options = options || {};
+    options.currencySymbol = options.currencySymbol || '$';
+
     var black = '#000',
         darkGrey = '#696969',
         medGrey = '#ddd';
@@ -36,7 +39,7 @@ export default Ember.Service.extend({
 
       .font(mainFont + '-Bold', 10)
       .fillColor(black)
-      .text(params.entityName, 425, 60)
+      .text(Ember.get(invoice, 'entityName'), 425, 60)
 
       // Line separator
       .save()
@@ -54,11 +57,11 @@ export default Ember.Service.extend({
 
       .font(mainFont + '-Bold', 9)
       .fillColor(black)
-      .text(params.invoiceID, 120, 135)
+      .text(Ember.get(invoice, 'invoiceID'), 120, 135)
       .font(mainFont, 9)
-      .text(params.issueDate, 120, 155)
-      .text(params.dueDate, 120, 175)
-      .text(params.subject, 120, 195)
+      .text(Ember.get(invoice, 'issueDate'), 120, 155)
+      .text(Ember.get(invoice, 'dueDate'), 120, 175)
+      .text(Ember.get(invoice, 'subject'), 120, 195)
 
       // Client name
       .font(mainFont, 9)
@@ -67,7 +70,7 @@ export default Ember.Service.extend({
 
       .font(mainFont + '-Bold', 10)
       .fillColor(black)
-      .text(params.clientName, 425, 135, {
+      .text(Ember.get(invoice, 'clientName'), 425, 135, {
         lineBreak: false
       })
 
@@ -110,7 +113,7 @@ export default Ember.Service.extend({
 
     doc.font(mainFont, 8);
 
-    params.items.forEach(function(item) {
+    Ember.get(invoice, 'items').forEach(function(item) {
       var marginTop = 10,
           marginBottom = 15,
           rowHeight = marginTop + marginBottom;
@@ -125,13 +128,17 @@ export default Ember.Service.extend({
 
       y += marginTop;
 
+      var quantityStr = options.currencySymbol + ' ' + Ember.get(item, 'quantity'),
+          unitPriceStr = options.currencySymbol + ' ' + Ember.get(item, 'unitPrice'),
+          amountStr = options.currencySymbol + ' ' + Ember.get(item, 'amount');
+
       doc.font(mainFont, 8)
-        .text(item.type, 50, y)
-        .text(item.description, 120, y)
-        .text(item.quantity, 370, y)
-        .text(item.unitPrice, 428, y)
+        .text(Ember.get(item, 'type'), 50, y)
+        .text(Ember.get(item, 'description'), 120, y)
+        .text(quantityStr, 370, y)
+        .text(unitPriceStr, 428, y)
         .font(mainFont + '-Bold', 8)
-        .text(item.amount, 485, y, {
+        .text(amountStr, 485, y, {
           align: 'right'
         });
 
@@ -141,16 +148,19 @@ export default Ember.Service.extend({
 
     y += 20;
 
+    var amountDueStr = options.currencySymbol + ' ' + Ember.get(invoice, 'amountDue');
+
     // Total Amount Due
     doc.font(mainFont + '-Bold', 14)
       .text('Amount Due', 340, y)
-      .text(params.amountDue, 450, y, {
+      .text(amountDueStr, 450, y, {
         align: 'right'
       })
     ;
 
     // Notes
-    if (params.notes && params.notes.length) {
+    var notes = Ember.get(invoice, 'notes');
+    if (notes && notes.length) {
       y += 40;
 
       doc.font(mainFont + '-Bold', 10)
@@ -163,7 +173,7 @@ export default Ember.Service.extend({
       y += 15;
 
       doc.font(mainFont, 9)
-        .text(params.notes, 50, y);
+        .text(notes, 50, y);
     }
 
     doc.end();

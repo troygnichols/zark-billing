@@ -1,5 +1,11 @@
-<h2 id="title">Welcome to Ember.js</h2>
+<br>
+<br>
 
-{{#link-to 'invoices'}}Invoices{{/link-to}}
+<div class="container">
+  <h1>Zark Billing</h1>
 
-{{outlet}}
+  {{#link-to 'log-time' class='button button-primary'}}Log Time{{/link-to}}
+  {{#link-to 'invoices' class='button button-primary'}}Invoices{{/link-to}}
+
+  {{outlet}}
+</div>
