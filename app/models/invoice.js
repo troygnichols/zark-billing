@@ -3,12 +3,18 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   entityName: DS.attr('string'),
   clientName: DS.attr('string'),
-  invoiceID: DS.attr('string'),
-  issueDate: DS.attr('string'),
-  dueDate: DS.attr('string'),
-  subject: DS.attr('string'),
+  invoiceID:  DS.attr('string'),
+  issueDate:  DS.attr('string'),
+  dueDate:    DS.attr('string'),
+  subject:    DS.attr('string'),
+  notes:      DS.attr('string'),
+  paidAt:     DS.attr('string'),
 
   items: DS.hasMany('item'),
+
+  isPaid: function() {
+    return !!this.get('paidAt');
+  }.property('paidAt'),
 
   amountDue: function() {
     var sum = this.get('items').reduce(function(acc, item) {

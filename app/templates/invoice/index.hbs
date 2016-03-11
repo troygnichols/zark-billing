@@ -1,0 +1,76 @@
+<h4>Invoice: {{model.invoiceID}}</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Invoice ID:</strong></td>
+      <td>{{model.invoiceID}}</td>
+    </tr>
+    <tr>
+      <td><strong>Your Business:</strong></td>
+      <td>{{model.entityName}}</td>
+    </tr>
+    <tr>
+      <td><strong>Client:</strong></td>
+      <td>{{model.clientName}}</td>
+    </tr>
+    <tr>
+      <td><strong>Issued On:</strong></td>
+      <td>{{model.issueDate}}</td>
+    </tr>
+    <tr>
+      <td><strong>Due On:</strong></td>
+      <td>{{model.dueDate}}</td>
+    </tr>
+    <tr>
+      <td><strong>Subject</strong>:</td>
+      <td>{{model.subject}}</td>
+    </tr>
+    <tr>
+      <td><strong>Payment</strong>:</td>
+      <td>
+        {{#if model.isPaid}}
+          Paid at: {{model.paidAt}}
+        {{else}}
+          <em>Not paid yet</em>
+        {{/if}}
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Notes</strong>:</td>
+      <td>{{model.notes}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Qty</th>
+      <th>Unit Price</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each item in model.items}}
+    <tr>
+      <td>{{item.itemType}}</td>
+      <td>{{item.description}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.unitPrice}}</td>
+      <td>{{item.amount}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+
+<h5>Amount Due: <strong>{{currencySymbol}} {{model.amountDue}}</strong></h5>
+
+{{#link-to 'invoice.edit' class='button button-primary'}}Edit{{/link-to}}
+<button class="button" {{action 'generateInvoicePdf'}}>Generate PDF</button>
+
+<br>
+<br>
+<br>

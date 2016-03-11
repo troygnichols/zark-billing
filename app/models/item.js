@@ -1,10 +1,10 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  type: DS.attr('string'),
+  itemType:    DS.attr('string'),
   description: DS.attr('string'),
-  quantity: DS.attr('number'),
-  unitPrice: DS.attr('number'),
+  quantity:    DS.attr('number'),
+  unitPrice:   DS.attr('number'),
 
   amount: function() {
     var q = this.get('quantity'),

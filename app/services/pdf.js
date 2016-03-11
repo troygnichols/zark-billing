@@ -133,7 +133,7 @@ export default Ember.Service.extend({
           amountStr = options.currencySymbol + ' ' + Ember.get(item, 'amount');
 
       doc.font(mainFont, 8)
-        .text(Ember.get(item, 'type'), 50, y)
+        .text(Ember.get(item, 'itemType'), 50, y)
         .text(Ember.get(item, 'description'), 120, y)
         .text(quantityStr, 370, y)
         .text(unitPriceStr, 428, y)

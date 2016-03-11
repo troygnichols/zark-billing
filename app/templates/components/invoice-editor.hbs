@@ -1,37 +1,41 @@
-<h4>Create an Invoice</h4>
-
 <form>
   <div class="row">
     <div class="six columns">
       <label>Your Business</label>
-      {{input type='text' required=true class='u-full-width' placeholder='Foobar LLC' value=model.entityName}}
+      {{input type='text' required=true class='u-full-width' placeholder='Foobar LLC' value=invoice.entityName}}
     </div>
   </div>
   <div class="row">
     <div class="six columns">
       <label>Your Client</label>
-      {{input type='text' class='u-full-width' placeholder='Bankcorp' value=model.clientName}}
+      {{input type='text' class='u-full-width' placeholder='Bankcorp' value=invoice.clientName}}
     </div>
   </div>
   <div class="row">
     <div class="six columns">
       <label>Invoice ID</label>
-      {{input type='text' class='u-full-width' placeholder='42' value=model.invoiceID}}
+      {{input type='text' class='u-full-width' placeholder='42' value=invoice.invoiceID}}
     </div>
   </div>
   <div class="row">
     <div class="six columns">
       <label>Date Issued</label>
-      {{input type='text' placeholder='2015-01-01' value=model.issueDate}}
+      {{input type='text' placeholder='2015-01-01' value=invoice.issueDate}}
 
       <label>Due Date</label>
-      {{input type='text' placeholder='2015-01-15' value=model.dueDate}}
+      {{input type='text' placeholder='2015-01-15' value=invoice.dueDate}}
     </div>
   </div>
   <div class="row">
     <div class="six columns">
       <label>Subject</label>
-      {{input type='text' class='u-full-width' placeholder='Software development and consulting services' value=model.subject}}
+      {{input type='text' class='u-full-width' placeholder='Software development and consulting services' value=invoice.subject}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <label>Paid</label>
+      {{input type='date' value=invoice.paidAt}}
     </div>
   </div>
 
@@ -49,10 +53,10 @@
       </tr>
     </thead>
     <tbody>
-      {{#each item in model.items}}
+      {{#each item in invoice.items}}
         <tr>
           <td>
-            {{view 'select' class='u-full-width' content=itemTypeOptions value=item.type}}
+            {{view 'select' class='u-full-width' content=itemTypeOptions value=item.temType}}
           </td>
           <td>
             {{input type='text' class='u-full-width' placeholder='Development on new features' value=item.description}}
@@ -77,21 +81,18 @@
 
   <button class="button" {{action 'newItem'}}>{{fa-icon 'plus'}} Add Item</button>
 
-  <h5 class="u-pull-right">Amount Due {{currencySymbol}} {{model.amountDue}}</h5>
+  <h5 class="u-pull-right">Amount Due {{currencySymbol}} {{invoice.amountDue}}</h5>
   <br>
 
   <hr>
 
   <h5>Notes</h5>
-  {{textarea class='u-full-width' value=model.notes}}
+  {{textarea class='u-full-width' value=invoice.notes}}
 
   <br>
   <br>
   <br>
 
-  <button class="button button-primary" {{action 'generateInvoice'}}>Generate Invoice</button>
+  <button class="button button-primary" {{action 'save'}}>Save</button>
+  <button class="button" {{action 'generateInvoicePdf'}}>Generate PDF</button>
 </form>
-
-<br>
-<br>
-<br>

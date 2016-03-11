@@ -1,0 +1,32 @@
+<h4>Invoices</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Invoice ID</th>
+      <th>Your Business</th>
+      <th>Client</th>
+      <th>Issued</th>
+      <th>Due</th>
+      <th>Subject</th>
+      <th>Notes</th>
+      <th>Paid?</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each invoice in model}}
+    <tr>
+      <td>{{#link-to 'invoice' invoice.id}}{{invoice.invoiceID}}{{/link-to}}</td>
+      <td>{{invoice.entityName}}</td>
+      <td>{{invoice.clientName}}</td>
+      <td>{{invoice.issueDate}}</td>
+      <td>{{invoice.dueDate}}</td>
+      <td>{{invoice.subject}}</td>
+      <td>{{invoice.notes}}</td>
+      <td>{{yes-no invoice.isPaid}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+
+{{#link-to 'invoices.new' class='button button-primary'}}New Invoice{{/link-to}}

@@ -19,14 +19,14 @@ var params = {
   subject: 'Software development and consuling services',
   items: [
     {
-      type: 'Service',
+      itemType: 'Service',
       description: 'Development - back office ember.js rewrite',
       quantity: '16.5 hr',
       unitPrice: '$100.00',
       amount: '$1,650.00'
     },
     {
-      type: 'Service',
+      itemType: 'Service',
       description: 'Ember.js consulting/training',
       quantity: '7.5 hr',
       unitPrice: '$100.00',
@@ -151,7 +151,7 @@ params.items.forEach(function(item) {
 
   y += marginTop
 
-  doc.text(item.type, 50, y)
+  doc.text(item.itemType, 50, y)
     .text(item.description, 120, y)
     .text(item.quantity, 370, y)
     .text(item.unitPrice, 428, y)
