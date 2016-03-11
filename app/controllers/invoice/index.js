@@ -36,7 +36,7 @@ export default Ember.Controller.extend({
       });
     },
 
-    processStripeToken: function(token) {
+    processStripeToken: function() {
       this.set('model.paidAt', ''+new Date());
       this.get('model').save();
     }

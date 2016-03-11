@@ -31,7 +31,7 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    willTransition: function(transition) {
+    willTransition: function() {
       if (this.get('currentModel.isNew')) {
         this.get('currentModel').deleteRecord();
       }
