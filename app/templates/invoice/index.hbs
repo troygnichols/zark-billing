@@ -32,7 +32,15 @@
         {{#if model.isPaid}}
           Paid at: {{model.paidAt}}
         {{else}}
-          <em>Not paid yet</em>
+          <span class="no">Not paid yet</span>
+          &nbsp;
+          {{stripe-checkout
+              image="/assets/images/orange_cat.png"
+              label="$ Pay Now"
+              name=stripeName
+              description=model.subject
+              amount=stripeAmount
+              action="processStripeToken"}}
         {{/if}}
       </td>
     </tr>
@@ -68,8 +76,13 @@
 
 <h5>Amount Due: <strong>{{currencySymbol}} {{model.amountDue}}</strong></h5>
 
-{{#link-to 'invoice.edit' class='button button-primary'}}Edit{{/link-to}}
-<button class="button" {{action 'generateInvoicePdf'}}>Generate PDF</button>
+{{#unless model.isPaid}}
+  {{#link-to 'invoice.edit' class='button button-primary'}}{{fa-icon 'edit'}} Edit{{/link-to}}
+{{/unless}}
+<button class="button" {{action 'generateInvoicePdf'}}>{{fa-icon 'fa-file-pdf-o'}} Generate PDF</button>
+
+<hr>
+<a href="javascript:void(0)" {{action 'deleteInvoice'}}>{{fa-icon 'times-circle'}} Delete Invoice</a>
 
 <br>
 <br>

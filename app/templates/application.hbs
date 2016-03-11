@@ -2,10 +2,14 @@
 <br>
 
 <div class="container">
-  <h1>Zark Billing</h1>
+  <h1><img src="/assets/images/orange_cat.png"/ height="100"> Zark Billing</h1>
+  <p>Hi I'm a tool for keeping track of invoices for freelance projects.
+    <br>I make <strong>PDFs</strong> and I can process payments too! Sorry I'm so ugly :(</p>
 
-  {{#link-to 'log-time' class='button button-primary'}}Log Time{{/link-to}}
-  {{#link-to 'invoices' class='button button-primary'}}Invoices{{/link-to}}
+  <hr>
+
+  {{#link-to 'log-time' class='button button-primary'}}{{fa-icon 'clock-o'}} Log Time{{/link-to}}
+  {{#link-to 'invoices' class='button button-primary'}}{{fa-icon 'fa-file-text-o'}} Invoices{{/link-to}}
 
   {{outlet}}
 </div>

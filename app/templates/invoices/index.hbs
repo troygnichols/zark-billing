@@ -11,6 +11,7 @@
       <th>Subject</th>
       <th>Notes</th>
       <th>Paid?</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -24,9 +25,10 @@
       <td>{{invoice.subject}}</td>
       <td>{{invoice.notes}}</td>
       <td>{{yes-no invoice.isPaid}}</td>
+      <td>{{#link-to 'invoice' invoice.id class='button'}}Details{{/link-to}}</td>
     </tr>
   {{/each}}
   </tbody>
 </table>
 
-{{#link-to 'invoices.new' class='button button-primary'}}New Invoice{{/link-to}}
+{{#link-to 'invoices.new' class='button button-primary'}}{{fa-icon 'fa-plus'}} New Invoice{{/link-to}}

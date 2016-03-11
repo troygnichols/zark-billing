@@ -43,5 +43,9 @@ module.exports = function(environment) {
 
   }
 
+  ENV.stripe = {
+    key: 'pk_test_VpaF5VfKSi1hTkiLsyX58cPu'
+  }
+
   return ENV;
 };

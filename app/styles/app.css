@@ -1,9 +1,22 @@
 .yes {
-  color: green;
+  color: #59FF93;
   font-weight: bold;
 }
 
 .no {
-  color: red;
+  color: #FF6459;
   font-weight: bold;
+}
+
+input,select,textarea {
+  color: #000;
+}
+
+body {
+  background-color: #31343B;
+  color: #fff;
+}
+
+button,.button,button:hover,.button:hover,.button:visited,.button:focus {
+  color: #fff;
 }

@@ -1,6 +1,0 @@
-x Make separate show/edit pages for invoice
-- from show page, add make a payment link
-- implement stripe payment API from backend
-x add isPaid flag to invoice
-- deploy to heroku
-- clean up styling
