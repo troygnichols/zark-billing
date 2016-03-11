@@ -27,6 +27,10 @@
       <td>{{yes-no invoice.isPaid}}</td>
       <td>{{#link-to 'invoice' invoice.id class='button'}}Details{{/link-to}}</td>
     </tr>
+  {{else}}
+    <tr>
+      <td colspan="9"><center><em>No invoices yet</em></center></td>
+    </tr>
   {{/each}}
   </tbody>
 </table>
